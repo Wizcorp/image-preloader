@@ -1,0 +1,12 @@
+{
+	"name": "ImagePreloader",
+	"version": "0.1.0",
+	"description": "An image pre-loader component",
+	"dependencies": {
+		"component/inherit": "*",
+		"Wizcorp/eventemitter": "*"
+	},
+	"scripts": [
+		"index.js"
+	]
+}
