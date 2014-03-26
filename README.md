@@ -1,4 +1,4 @@
-ImagePreloader
+image-preloader
 ==============
 
 Preload your images with the ImagePreloader

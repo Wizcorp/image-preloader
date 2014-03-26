@@ -1,6 +1,6 @@
 {
-	"name": "ImagePreloader",
-	"version": "0.1.0",
+	"name": "image-preloader",
+	"version": "0.2.0",
 	"description": "An image pre-loader component",
 	"dependencies": {
 		"component/inherit": "*",
