@@ -73,7 +73,6 @@ function loadNext() {
 		var toLoad = that._keyMap.length;
 		if (!processed) {
 			if (err) {
-				that.imgList[key] = new Image();
 				that.imgList[key].src = that.placeholderImgData;
 				that.error++;
 				that.errKeys.push(key);
