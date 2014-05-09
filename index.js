@@ -3,6 +3,7 @@ var EventEmitter = require('EventEmitter');
 
 var defaultTtl = 3000;
 var defaultMaxParallel = 5;
+var placeholderImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=';
 
 function ImagePreloader() {
 	this.urlList = {};
@@ -15,6 +16,7 @@ function ImagePreloader() {
 
 	this.ttl = defaultTtl;
 	this.maxParallel = defaultMaxParallel;
+	this.placeholderImg = placeholderImg;
 }
 
 inherit(ImagePreloader, EventEmitter);
@@ -40,7 +42,7 @@ function loadNext() {
 
 	var key = this._keyMap[done];
 	var img = this.imgList[key] = new Image();
-	var url = this.urlList[key];
+	var url = this.urlList[key] || this.placeholderImg;
 
 	function onLoad() {
 		callback();
@@ -70,7 +72,8 @@ function loadNext() {
 		var toLoad = that._keyMap.length;
 		if (!processed) {
 			if (err) {
-				that.imgList[key] = null;
+				that.imgList[key] = new Image();
+				that.imgList[key].src = that.placeholderImg;
 				that.error++;
 				that.emit('error', {loaded: that.loaded, error: that.error, total: toLoad, errorMsg: err});
 			} else {
