@@ -75,5 +75,5 @@ Called every-time a picture fails to load, you can use it for progress bars. Sen
 - `currentKey`: which key failed
 - `loaded`: number of images successfully loaded so far
 - `error`: number of failed images so far
-- `total`: total number of images we are processing
+- `total`: total number of processed images
 - `errorMsg`: string error message
