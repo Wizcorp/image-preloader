@@ -1,7 +1,7 @@
-ImagePreloader
+image-preloader
 ==============
 
-ImagePreloader is an image preloader particularly designed to work with canvas.
+image-preloader is an image preloader particularly designed to work with canvas.
 
 # Overview
 
