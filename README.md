@@ -21,7 +21,7 @@ imagePreloader.on('finished', function (data) {
 	// the images are in data.images, matching the
 	// provided object structure, so you can simply do:
 	assets = data.images;
-	// and now you have image objects instead of strings, you can for example:
+	// and now you have image objects instead of strings, you can do for example:
 	whateverContext.drawImage(assets.sprite, 0, 0);
 });
 imagePreloader.start();
