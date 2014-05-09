@@ -76,4 +76,4 @@ Called every-time a picture fails to load, you can use it for progress bars. Sen
 - `loaded`: number of images successfully loaded so far
 - `error`: number of failed images so far
 - `total`: total number of images we are processing
-- errorMsg: string error message
+- `errorMsg`: string error message
