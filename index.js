@@ -3,6 +3,7 @@ var EventEmitter = require('EventEmitter');
 
 var defaultTtl = 3000;
 var defaultMaxParallel = 5;
+var emptyImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=';
 
 function ImagePreloader() {
 	this.urlList = {};
@@ -12,9 +13,11 @@ function ImagePreloader() {
 	this.loading = 0;
 	this.loaded = 0;
 	this.error = 0;
+	this.errKeys = [];
 
 	this.ttl = defaultTtl;
 	this.maxParallel = defaultMaxParallel;
+	this.placeholderImgData = emptyImg;
 }
 
 inherit(ImagePreloader, EventEmitter);
@@ -70,18 +73,19 @@ function loadNext() {
 		var toLoad = that._keyMap.length;
 		if (!processed) {
 			if (err) {
-				that.imgList[key] = null;
+				that.imgList[key].src = that.placeholderImgData;
 				that.error++;
-				that.emit('error', {loaded: that.loaded, error: that.error, total: toLoad, errorMsg: err});
+				that.errKeys.push(key);
+				that.emit('error', {loaded: that.loaded, error: that.error, total: toLoad, errorMsg: err, currentKey: key});
 			} else {
 				that.loaded++;
-				that.emit('loaded', {loaded: that.loaded, error: that.error, total: toLoad});
+				that.emit('loaded', {loaded: that.loaded, error: that.error, total: toLoad, currentKey: key});
 			}
 			that.loading--;
 			processed = true;
 		}
 		if (that.loaded + that.error === toLoad) {
-			that.emit('finished', {loaded: that.loaded, error: that.error, total: toLoad, images: that.imgList}, 'test OKKKKKK');
+			that.emit('finished', {loaded: that.loaded, error: that.error, errKeys: that.errKeys, total: toLoad, images: that.imgList});
 		} else {
 			loadNext.call(that);
 		}
@@ -92,7 +96,12 @@ function loadNext() {
 	img.addEventListener('abort', onError, false);
 	ttlTimeout = setTimeout(onTimeout, this.ttl);
 
-	img.src = url;
+	if (url) {
+		img.src = url;
+	} else {
+		onError();
+	}
+
 	loadNext.call(this);
 }
 
@@ -119,12 +128,19 @@ ImagePreloader.prototype.start = function (options) {
 		this.maxParallel = defaultMaxParallel;
 	}
 
+	if (options.placeholderImgData !== undefined) {
+		this.placeholderImgData = options.placeholderImgData;
+	} else {
+		this.placeholderImgData = emptyImg;
+	}
+
 	this.imgList = {};
 	this._keyMap = Object.keys(this.urlList);
 
 	this.loading = 0;
 	this.loaded = 0;
 	this.error = 0;
+	this.errKeys = [];
 
 	loadNext.call(this);
 };

@@ -1,6 +1,6 @@
 {
 	"name": "image-preloader",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"description": "An image pre-loader component",
 	"dependencies": {
 		"Wizcorp/eventemitter": "*",
