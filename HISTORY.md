@@ -1,5 +1,9 @@
 # Release history
 
+## v0.2.3
+
+- Changed default ttl from 3s to 15s.
+
 ## v0.2.2
 
 - Safer image loading: images with a wrong or missing source get a placeholder image (when used
