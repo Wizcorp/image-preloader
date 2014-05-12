@@ -33,7 +33,7 @@ imagePreloader.start();
 
 You can provide completely optional parameters to the start method:
 
-- `ttl`: the maximum time you want to wait on one image before having the onerror triggered (ms). Default value is 3000ms.
+- `ttl`: the maximum time you want to wait on one image before having the onerror triggered (ms). Default value is 15000ms.
 - `maxParallel`: the maximum number of images you want to allow to be loaded in parallel (if you want to avoid something else to be blocked). Default value is 5.
 - `placeholderImgData`: what data image you want for failed images. Default is an empty 1x1 transparent png.
 

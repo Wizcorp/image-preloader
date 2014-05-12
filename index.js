@@ -1,7 +1,7 @@
 var inherit = require('util').inherits;
 var EventEmitter = require('EventEmitter');
 
-var defaultTtl = 3000;
+var defaultTtl = 15000;
 var defaultMaxParallel = 5;
 var emptyImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=';
 
